@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f4; }
+        .slider-container { position: relative; width: 80%; max-width: 600px; }
+        .slides { display: none; width: 100%; }
+        .prev, .next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5); color: white;
+            border: none; padding: 10px; cursor: pointer;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <img class="slides" src="image1.jpg" alt="Image 1">
+    <img class="slides" src="image2.jpg" alt="Image 2">
+    <img class="slides" src="image3.jpg" alt="Image 3">
+    
+    <button class="prev" onclick="changeSlide(-1)">❮</button>
+    <button class="next" onclick="changeSlide(1)">❯</button>
+</div>
+
+<script>
+    let index = 0;
+    function showSlide(n) {
+        let slides = document.querySelectorAll(".slides");
+        if (n >= slides.length) { index = 0; }
+        if (n < 0) { index = slides.length - 1; }
+        slides.forEach(slide => slide.style.display = "none");
+        slides[index].style.display = "block";
+    }
+    function changeSlide(n) {
+        index += n;
+        showSlide(index);
+    }
+    showSlide(index);
+</script>
+
+</body>
+</html>
